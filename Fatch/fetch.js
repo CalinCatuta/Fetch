@@ -1,8 +1,8 @@
 const div = document.querySelector('div')
 const section = document.querySelector('.bt-grp')
 const btns = document.querySelectorAll("button")
-window.addEventListener('DOMContentLoaded', getNews())
-window.addEventListener('DOMContentLoaded', changeBtn())
+window.addEventListener('DOMContentLoaded', getNews)
+window.addEventListener('DOMContentLoaded', changeBtn)
 
 
 // OFFSET value
@@ -48,6 +48,7 @@ var offsetChange = window.setInterval(function () {
         window.b = 5
     }
     getNews();
+
 }, 5000)
 
 // add color class after 15sec
@@ -66,17 +67,37 @@ function changeBtn() {
 
 // DOM loaded
 
-function getNews() {
-    fetch('https://run.mocky.io/v3/e79653de-871f-4933-90dd-06bf6e461899')
-        .then(res => res.json())
-        .then(data => {
-            let output = ''
-            data.news.slice(window.a, window.b).forEach(function (stiri) {
-                output += `
+// function getNews() {
+//     fetch('data.json')
+//         .then(res => res.json())
+//         .then(data => {
+//             let output = ''
+//             data.news.slice(window.a, window.b).forEach(function (stiri) {
+//                 output += `
+//                 <h1>${stiri.title}</h1>
+//                 <p>${stiri.details}</p>
+//                 `
+//             })
+//             div.innerHTML = output;
+//         })
+// }
+
+async function getNews() {
+    try {
+        const response = await fetch('data.json');
+        const data = await response.json();
+        
+        let output = '';
+        
+        data.news.slice(window.a, window.b).forEach(function (stiri) {
+            output += `
                 <h1>${stiri.title}</h1>
                 <p>${stiri.details}</p>
-                `
-            })
-            div.innerHTML = output;
-        })
+            `;
+        });
+        
+        div.innerHTML = output;
+    } catch (error) {
+        console.error('Error fetching news:', error);
+    }
 }
