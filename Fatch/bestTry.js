@@ -40,16 +40,8 @@ btns.forEach((btn, index) => {
 });
 // fetch when click on btn
 function fetchOnClick(index) {
-  if (index === index) {
-    a = index * 5;
-    x = index;
-  } else if (index === index) {
-    a = index * 5;
-    x = index;
-  } else if (index === index) {
-    a = index * 5;
-    x = index;
-  }
+  a = index * 5;
+  x = index;
   fetchData(a);
   changeButton(a, x);
 }
