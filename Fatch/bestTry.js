@@ -2,6 +2,9 @@ const div = document.querySelector("div");
 const section = document.querySelector(".bt-grp");
 const btns = document.querySelectorAll("button");
 
+const perPage = 5;
+const limit = 10;
+const intervalNumber = 5000;
 let a = 0;
 let x = 0;
 const btnsNum = btns.length - 1;
@@ -14,8 +17,8 @@ async function fetchData(a) {
 }
 // run every 5sec
 var offsetChange = window.setInterval(function () {
-  if (a < 10) {
-    a = a + 5;
+  if (a < limit) {
+    a = a + perPage;
   } else {
     a = 0;
   }
@@ -28,7 +31,7 @@ var offsetChange = window.setInterval(function () {
   // send 0 or 5 or 10
   fetchData(a);
   changeButton(a, x);
-}, 5000);
+}, intervalNumber);
 
 // add class active on click
 btns.forEach((btn, index) => {
@@ -40,7 +43,7 @@ btns.forEach((btn, index) => {
 });
 // fetch when click on btn
 function fetchOnClick(index) {
-  a = index * 5;
+  a = index * perPage;
   x = index;
   fetchData(a);
   changeButton(a, x);
@@ -66,7 +69,7 @@ function changeClassActive(n) {
 function getNews(news, a) {
   let output = "";
 
-  news.slice(a, a + 5).forEach(function (stiri) {
+  news.slice(a, a + perPage).forEach(function (stiri) {
     output += `
             <h1>${stiri.title}</h1>
             <p>${stiri.details}</p>
