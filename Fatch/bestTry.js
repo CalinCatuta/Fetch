@@ -3,6 +3,8 @@ const section = document.querySelector(".bt-grp");
 const btns = document.querySelectorAll("button");
 
 let a = 0;
+let x = 0;
+const btnsNum = btns.length - 1;
 
 async function fetchData(a) {
   const response = await fetch("data.json");
@@ -17,37 +19,48 @@ var offsetChange = window.setInterval(function () {
   } else {
     a = 0;
   }
+  // change x to send in the changeButton
+  if (x < btnsNum) {
+    x = x + 1;
+  } else {
+    x = 0;
+  }
   // send 0 or 5 or 10
   fetchData(a);
-  changeButton(a);
+  changeButton(a, x);
 }, 5000);
 
 // add class active on click
-btns.forEach((btn) => {
+btns.forEach((btn, index) => {
   btn.addEventListener("click", () => {
     document.querySelector(".color")?.classList.remove("color");
     btn.classList.add("color");
-    fetchOnClick(btn);
+    fetchOnClick(index);
   });
 });
 // fetch when click on btn
-function fetchOnClick(btn) {
-  if (btn.classList.contains("btn1")) {
-    fetchData(0);
-  } else if (btn.classList.contains("btn2")) {
-    fetchData(5);
-  } else if (btn.classList.contains("btn3")) {
-    fetchData(10);
+function fetchOnClick(index) {
+  if (index === index) {
+    a = index * 5;
+    x = index;
+  } else if (index === index) {
+    a = index * 5;
+    x = index;
+  } else if (index === index) {
+    a = index * 5;
+    x = index;
   }
+  fetchData(a);
+  changeButton(a, x);
 }
 // change button class to active after 5sec
-function changeButton(a) {
+function changeButton(a, x) {
   if (a === 0) {
-    changeClassActive(0);
+    changeClassActive(x);
   } else if (a === 5) {
-    changeClassActive(1);
+    changeClassActive(x);
   } else {
-    changeClassActive(2);
+    changeClassActive(x);
   }
 }
 // get the order of the button we want to have the class
