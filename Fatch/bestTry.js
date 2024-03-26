@@ -30,7 +30,7 @@ var offsetChange = window.setInterval(function () {
   }
   // send 0 or 5 or 10
   fetchData(a);
-  changeButton(a, x);
+  changeButton(x);
 }, intervalNumber);
 
 // add class active on click
@@ -46,17 +46,11 @@ function fetchOnClick(index) {
   a = index * perPage;
   x = index;
   fetchData(a);
-  changeButton(a, x);
+  changeButton(x);
 }
 // change button class to active after 5sec
-function changeButton(a, x) {
-  if (a === 0) {
-    changeClassActive(x);
-  } else if (a === 5) {
-    changeClassActive(x);
-  } else {
-    changeClassActive(x);
-  }
+function changeButton(x) {
+  changeClassActive(x);
 }
 // get the order of the button we want to have the class
 // don't repeat the code using this function
